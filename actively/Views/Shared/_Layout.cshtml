@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div data-role="page" data-theme="a">
+            <div data-role="header">
+                <a data-role="button" data-inline="true" data-icon="home" class="ui-btn-left" data-iconpos="notext" title="Home"></a>
+                <h1 role="heading">@ViewBag.Title</h1>
+                <a data-role="button" data-inline="true" data-icon="grid" class="ui-btn-right" data-iconpos="notext" title="Navigation"></a>
+            </div>
+            <div data-role="content">
+                @RenderBody()
+            </div>
+        </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquerymobile")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

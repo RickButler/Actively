@@ -4,6 +4,7 @@
 
 <div id="map_canvas"></div>
 
+
 @section head{
     <style>
       html, body,.ui-content, #map_canvas {
@@ -28,15 +29,7 @@
                 // Try HTML5 geolocation
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
-                            pos = new google.maps.LatLng(position.coords.latitude,
-                                                         position.coords.longitude);
-
-                        var infowindow = new google.maps.InfoWindow({
-                            map: map,
-                            position: pos,
-                            content: 'Location found using HTML5.'
-                        });
-
+                        pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                         map.setCenter(pos);
                     }, function () {
                         handleNoGeolocation(true);
@@ -57,25 +50,11 @@
                 };
                 map = new google.maps.Map(document.getElementById('map_canvas'),
                     myOptions);
-
-
             }
 
-            function handleNoGeolocation(errorFlag) {
-                if (errorFlag) {
-                    var content = 'Error: The Geolocation service failed.';
-                } else {
-                    var content = 'Error: Your browser doesn\'t support geolocation.';
-                }
-
-                var options = {
-                    map: map,
-                    position: new google.maps.LatLng(60, 105),
-                    content: content,    
-                };
-
-                var infowindow = new google.maps.InfoWindow(options);
-                map.setCenter(options.position);
+            function handleNoGeolocation(errorFlag) {   
+                $(document).simpledialog2(dialogModel); 
+                //map.setCenter(options.position);
             }
 
             $(document).ready(function () {
@@ -83,8 +62,24 @@
                     $('#map_canvas').height($(window).height() - $('.ui-header').outerHeight());
                 });
                 $(window).resize();
-                
+                GeoLocation();
                 initialize();
             });
+
+
+            var dialogModel = {
+                mode: 'button',
+                headerText: 'Zip Code',
+                headerClose: true,
+                buttonPrompt: 'Please enter you Zipcode',
+                buttonInput: true,
+                buttons: {
+                    'OK': {
+                        click: function () {
+                            $('#buttonoutput').text($.mobile.sdLastInput);
+                        }
+                    },
+                }
+            };
     </script>
 }

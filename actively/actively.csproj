@@ -126,16 +126,29 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\API\PostalCodeController.cs" />
     <Compile Include="Controllers\API\LocationController.cs" />
+    <Compile Include="Controllers\PostalCodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201207172231468_InitialCreate.cs" />
+    <Compile Include="Migrations\201207172231468_InitialCreate.Designer.cs">
+      <DependentUpon>201207172231468_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207202027539_add postal cdes.cs" />
+    <Compile Include="Migrations\201207202027539_add postal cdes.Designer.cs">
+      <DependentUpon>201207202027539_add postal cdes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActivelyContext.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationRepository.cs" />
+    <Compile Include="Models\PostalCodeRepository.cs" />
+    <Compile Include="Models\PostalCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +160,9 @@
     <Content Include="Content\images\icons-36-white.png" />
     <Content Include="Content\jquery.mobile-1.1.0.css" />
     <Content Include="Content\jquery.mobile-1.1.0.min.css" />
+    <Content Include="Content\jquery.mobile.simpledialog.css" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.mobile.simpledialog2.js" />
     <Content Include="Content\jquery.mobile.structure-1.1.0.css" />
     <Content Include="Content\jquery.mobile.structure-1.1.0.min.css" />
     <Content Include="Content\jquery.mobile.theme-1.1.1.css" />

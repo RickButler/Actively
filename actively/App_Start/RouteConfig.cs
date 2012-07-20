@@ -20,11 +20,10 @@ namespace actively
                 defaults: new { id = RouteParameter.Optional }
             );
             routes.MapHttpRoute(
-         name: "LocationApi",
-         routeTemplate: "api/Location/Lat/{Lat}/Long/{Long}/Distance/{Distance}",
-         defaults: new { controller = "Location", action = "GetLocations" }
-     );
-
+                name: "LocationApi",
+                routeTemplate: "api/Location/Lat/{Lat}/Long/{Long}/Distance/{Distance}",
+                defaults: new { controller = "Location", action = "GetLocations" }
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

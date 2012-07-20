@@ -11,7 +11,7 @@ using System.Data.Spatial;
 using actively.Models;
 
 
-namespace actively2.Controllers.API
+namespace actively.Controllers.API
 {
     public class LocationController : ApiController
     {

@@ -5,17 +5,8 @@
 <div id="map_canvas"></div>
 
 
-@section head{
-    <style>
-      html, body,.ui-content, #map_canvas {
-        margin: 0;
-        padding: 0;    
-      }
-    </style>
-<script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCh7wefO5T1MuNM4tnooSho41EN2lunPEo&sensor=true">
-    </script>
-
+@section head{ 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCh7wefO5T1MuNM4tnooSho41EN2lunPEo&sensor=true"></script>
 }
 
 
@@ -29,7 +20,8 @@
                 // Try HTML5 geolocation
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
-                        pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        $(document).trigger('simpledialog', { 'method': 'close' });
+                        pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);                       
                         map.setCenter(pos);
                     }, function () {
                         handleNoGeolocation(true);
@@ -38,7 +30,7 @@
                     // Browser doesn't support Geolocation
                     handleNoGeolocation(false);
                 }
-            }
+            };
 
             function initialize() {
                 var myOptions = {
@@ -48,38 +40,82 @@
                     overviewMapControl: false,
                     mapTypeControl: false
                 };
-                map = new google.maps.Map(document.getElementById('map_canvas'),
-                    myOptions);
-            }
+
+                map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+
+                if (pos == null) {
+                    handleNoGeolocation();
+                }
+                else {
+                    map.setCenter(pos);
+                }
+            };
 
             function handleNoGeolocation(errorFlag) {   
-                $(document).simpledialog2(dialogModel); 
+                $(document).simpledialog2(positionDialogModel);
                 //map.setCenter(options.position);
             }
 
             $(document).ready(function () {
-                $(window).resize(function () {
-                    $('#map_canvas').height($(window).height() - $('.ui-header').outerHeight());
-                });
-                $(window).resize();
-                GeoLocation();
+                WindowResize();
                 initialize();
+                GeoLocation();
+                
+                $(window).resize(WindowResize);                                                               
             });
+            
+            function WindowResize() {
+                $('#map_canvas').height($(window).height() - $('#header').height() - $('#footer').outerHeight());
+            };
 
-
-            var dialogModel = {
+            var positionDialogModel = {
                 mode: 'button',
-                headerText: 'Zip Code',
-                headerClose: true,
-                buttonPrompt: 'Please enter you Zipcode',
-                buttonInput: true,
+                width: '75%',
+                headerText: 'Your Location',
+                headerClose: false,
+                themeDialog: 'a',
+                themeInput: 'a',
+                buttonPrompt: 'Please click to <b>allow the browser\'s prompt for Geolocation</b>, or enter your <b>location below (City,State,Zip)</b>.',
+                buttonInput: true,                                                  
                 buttons: {
                     'OK': {
-                        click: function () {
-                            $('#buttonoutput').text($.mobile.sdLastInput);
+                        click: function () {                           
+                            GetPosition($.mobile.sdLastInput);
+                            //centermap on position
+                            //search near position for everything
+                            //bind to knockout
                         }
-                    },
+                    },                   
                 }
+            };
+
+            
+            function GetPosition(query)
+            {           
+                var url = './api/zip/' + query;                                            
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    type: 'GET'
+                }).done(function (data) {
+                    pos = new google.maps.LatLng(data[0].Position.Latitude, data[0].Position.Longitude)
+                    map.setCenter(pos);
+                })
+                    .fail(function() { alert("error"); })
+                    .always(function() {  });
+            };
+
+            function Search(term, sucess, failure) {
+                var url = './api/locations/search?latitude=' + pos.latitude + '&longitude=' + pos.longitude + '&term=' + term + '&distance=' + 50;
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    type: 'GET'
+                }).done(function () { sucess(); })
+                    .fail(function() { failure(); })
+                    .always(function() { alert("complete"); });
+                //bind to knockout
+                //should filter be part of knockout?                                    
             };
     </script>
 }

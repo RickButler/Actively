@@ -1,0 +1,92 @@
+@model actively.Models.Place
+
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CountryCode)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CountryCode)
+    @Html.ValidationMessageFor(model => model.CountryCode)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model =>  model.PostalCode)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PostalCode)
+    @Html.ValidationMessageFor(model => model.PostalCode)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.PlaceName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PlaceName)
+    @Html.ValidationMessageFor(model => model.PlaceName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.StateName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StateName)
+    @Html.ValidationMessageFor(model => model.StateName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.StateCode)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StateCode)
+    @Html.ValidationMessageFor(model => model.StateCode)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ProvinceName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ProvinceName)
+    @Html.ValidationMessageFor(model => model.ProvinceName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ProvinceCode)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ProvinceCode)
+    @Html.ValidationMessageFor(model => model.ProvinceCode)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.SubDivisionName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.SubDivisionName)
+    @Html.ValidationMessageFor(model => model.SubDivisionName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.SubDivisionCode)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.SubDivisionCode)
+    @Html.ValidationMessageFor(model => model.SubDivisionCode)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Position)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Position)
+    @Html.ValidationMessageFor(model => model.Position)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(model => model.Accuracy)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Accuracy)
+    @Html.ValidationMessageFor(model => model.Accuracy)
+</div>
+

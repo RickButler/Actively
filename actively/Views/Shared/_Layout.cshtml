@@ -4,21 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Courgette' rel='stylesheet' type='text/css'>
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("head", required: false)
 </head>
 <body>
     <div data-role="page" data-theme="a">
-            <div data-role="header">
-                <a data-role="button" data-inline="true" data-icon="home" class="ui-btn-left" data-iconpos="notext" title="Home"></a>
-                <h1 role="heading">@ViewBag.Title</h1>
-                <a data-role="button" data-inline="true" data-icon="grid" class="ui-btn-right" data-iconpos="notext" title="Navigation"></a>
-            </div>
-            <div data-role="content">
-                @RenderBody()
-            </div>
+        <div id="header" data-role="header">
+           <h1 id="logo">Actively</h1>
+           
+	                   
+                    <input type="search" name="search" data-icon="delete" id="search-basic" value="" />                    
+                                                                                                                                                                    
         </div>
+        <div data-role="content">
+            @RenderBody()
+        </div>
+        <div id="footer" data-role="footer" class="nav-footer"  data-position="fixed"> 
+            <div data-role="navbar" class="nav-footer" data-grid="c"> 
+                <ul>
+                    <li><a href="#" id="map" data-icon="home">Map</a></li>  
+                    <li><a href="#" id="home" data-icon="home">Location</a></li> 
+                    <li><a href="#" id="messages" data-icon="grid">Filter</a></li> 
+                    <li><a href="#" id="activities" data-icon="custom">Share</a></li> 
+                </ul> 
+            </div> 
+        </div>
+    </div>
+           
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquerymobile")
     @RenderSection("scripts", required: false)

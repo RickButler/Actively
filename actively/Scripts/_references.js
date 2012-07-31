@@ -6,3 +6,4 @@
 /// <reference path="modernizr-2.0.6-development-only.js" />
 /// <reference path="jquery.mobile-1.1.0.js" />
 /// <reference path="jquery.mobile.simpledialog2.js" />
+/// <reference path="object.watch.js" />

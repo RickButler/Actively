@@ -18,6 +18,6 @@ namespace actively.Models
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<actively2.Models.ActivelyContext>());
 
         public DbSet<actively.Models.Location> Locations { get; set; }
-        public DbSet<actively.Models.PostalCode> Postalcodes { get; set; }
+        public DbSet<actively.Models.Place> Places { get; set; }
     }
 }

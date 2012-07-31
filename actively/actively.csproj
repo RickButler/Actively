@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -126,34 +128,32 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\API\PostalCodeController.cs" />
-    <Compile Include="Controllers\API\LocationController.cs" />
-    <Compile Include="Controllers\PostalCodeController.cs" />
+    <Compile Include="Controllers\API\Locations\SearchController.cs" />
+    <Compile Include="Controllers\API\PlacesController.cs" />
+    <Compile Include="Controllers\API\LocationsController.cs" />
+    <Compile Include="Controllers\API\Places\CityController.cs" />
+    <Compile Include="Controllers\API\Places\TownController.cs" />
+    <Compile Include="Controllers\API\Places\ZipController.cs" />
+    <Compile Include="Controllers\API\Places\StateController.cs" />
+    <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LocationController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201207172231468_InitialCreate.cs" />
-    <Compile Include="Migrations\201207172231468_InitialCreate.Designer.cs">
-      <DependentUpon>201207172231468_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201207202027539_add postal cdes.cs" />
-    <Compile Include="Migrations\201207202027539_add postal cdes.Designer.cs">
-      <DependentUpon>201207202027539_add postal cdes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActivelyContext.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationRepository.cs" />
-    <Compile Include="Models\PostalCodeRepository.cs" />
-    <Compile Include="Models\PostalCode.cs" />
+    <Compile Include="Models\PlaceRepository.cs" />
+    <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\ajax-loader.png" />
+    <Content Include="Content\images\bg.png" />
     <Content Include="Content\images\icons-18-black.png" />
     <Content Include="Content\images\icons-18-white.png" />
     <Content Include="Content\images\icons-36-black.png" />
@@ -161,6 +161,7 @@
     <Content Include="Content\jquery.mobile-1.1.0.css" />
     <Content Include="Content\jquery.mobile-1.1.0.min.css" />
     <Content Include="Content\jquery.mobile.simpledialog.css" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.mobile.simpledialog2.js" />
     <Content Include="Content\jquery.mobile.structure-1.1.0.css" />
@@ -169,6 +170,7 @@
     <Content Include="Content\jquery.mobile.theme-1.1.1.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\appharbor.pubxml" />
     <None Include="Scripts\jquery-1.7.2.intellisense.js">
       <DependentUpon>jquery-1.7.2.js</DependentUpon>
     </None>
@@ -196,6 +198,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\object.watch.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -229,12 +232,18 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Location\Create.cshtml" />
-    <Content Include="Views\Location\Delete.cshtml" />
-    <Content Include="Views\Location\Details.cshtml" />
-    <Content Include="Views\Location\Edit.cshtml" />
-    <Content Include="Views\Location\Index.cshtml" />
-    <Content Include="Views\Location\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Locations\Create.cshtml" />
+    <Content Include="Views\Locations\Delete.cshtml" />
+    <Content Include="Views\Locations\Details.cshtml" />
+    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\Locations\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Places\Create.cshtml" />
+    <Content Include="Views\Places\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Places\Edit.cshtml" />
+    <Content Include="Views\Places\Delete.cshtml" />
+    <Content Include="Views\Places\Details.cshtml" />
+    <Content Include="Views\Places\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -270,6 +279,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

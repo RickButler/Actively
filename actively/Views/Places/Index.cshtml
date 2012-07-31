@@ -1,0 +1,91 @@
+﻿@model IEnumerable<actively.Models.Place>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProvinceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProvinceCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubDivisionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubDivisionCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accuracy)
+            </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StateName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StateCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProvinceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProvinceCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubDivisionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubDivisionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accuracy)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+

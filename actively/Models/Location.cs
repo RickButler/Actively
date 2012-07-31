@@ -9,17 +9,30 @@ using System.ComponentModel.DataAnnotations;
 namespace actively.Models
 {
     public class Location
-    {               
+    {
+        [Key, Newtonsoft.Json.JsonIgnore, System.Xml.Serialization.XmlIgnore]  
         public int Id { get; set; }
         
         [StringLength(128)]
         public string Name { get; set; }
-        
-        [Newtonsoft.Json.JsonIgnore, System.Xml.Serialization.XmlIgnore]
-        public DbGeography Coordinates {get; set;}
-        
+
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public string Point { get { return Coordinates == null ? string.Empty : Coordinates.AsText(); } set { Coordinates = DbGeography.PointFromText(value, DbGeography.DefaultCoordinateSystemId); } }
+        public Position Position
+        {
+            get
+            {
+                if (Coordinates != null)
+                    return new Position { Latitude = this.Coordinates.Latitude, Longitude = this.Coordinates.Longitude };
+                return new Position();
+            }
+            set
+            {      
+                Coordinates = value.ToDBGeography();                    
+            }
+        }
+
+        [Newtonsoft.Json.JsonIgnore, System.Xml.Serialization.XmlIgnore]
+        public DbGeography Coordinates { get; set; }
             
         [StringLength(128)]
         public string Address { get; set; }

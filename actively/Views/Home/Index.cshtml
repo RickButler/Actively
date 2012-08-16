@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div id="map_canvas"></div>
+<div id="map" data-bind="mapsGoogle: { config: config, mapper: mapper }""></div>
 
 
 @section head{ 
@@ -12,110 +12,28 @@
 
 
 @section scripts {
-        <script type="text/javascript">
-            var map;
-            var pos;
+    @Scripts.Render("~/bundles/lopeway");
+    <script>
 
-            function GeoLocation() {
-                // Try HTML5 geolocation
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        $(document).trigger('simpledialog', { 'method': 'close' });
-                        pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);                       
-                        map.setCenter(pos);
-                    }, function () {
-                        handleNoGeolocation(true);
-                    });
-                } else {
-                    // Browser doesn't support Geolocation
-                    handleNoGeolocation(false);
-                }
+        function WindowResize() {
+            $('#map').height($(window).height() - $('#header').height() - $('#footer').outerHeight());
+        };
+        $(document).ready(function () {
+            WindowResize();
+            $(window).resize(WindowResize);
+        });
+
+       
+            ko.bindingHandlers.mapsGoogle = lopeway.bindingHandlers.maps.google.v2;
+            RedmondWA = lopeway.locations.world.usa.wa.redmond;
+            var viewModel = {
+                config: {
+                   // center: RedmondWA,
+                    //zoom: 4
+                },
+                mapper: {}
             };
-
-            function initialize() {
-                var myOptions = {
-                    zoom: 13,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    streetViewControl: false,
-                    overviewMapControl: false,
-                    mapTypeControl: false
-                };
-
-                map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
-
-                if (pos == null) {
-                    handleNoGeolocation();
-                }
-                else {
-                    map.setCenter(pos);
-                }
-            };
-
-            function handleNoGeolocation(errorFlag) {   
-                $(document).simpledialog2(positionDialogModel);
-                //map.setCenter(options.position);
-            }
-
-            $(document).ready(function () {
-                WindowResize();
-                initialize();
-                GeoLocation();
-                
-                $(window).resize(WindowResize);                                                               
-            });
-            
-            function WindowResize() {
-                $('#map_canvas').height($(window).height() - $('#header').height() - $('#footer').outerHeight());
-            };
-
-            var positionDialogModel = {
-                mode: 'button',
-                width: '75%',
-                headerText: 'Your Location',
-                headerClose: false,
-                themeDialog: 'a',
-                themeInput: 'a',
-                buttonPrompt: 'Please click to <b>allow the browser\'s prompt for Geolocation</b>, or enter your <b>location below (City,State,Zip)</b>.',
-                buttonInput: true,                                                  
-                buttons: {
-                    'OK': {
-                        click: function () {                           
-                            GetPosition($.mobile.sdLastInput);
-                            //centermap on position
-                            //search near position for everything
-                            //bind to knockout
-                        }
-                    },                   
-                }
-            };
-
-            
-            function GetPosition(query)
-            {           
-                var url = './api/zip/' + query;                                            
-                $.ajax({
-                    url: url,
-                    dataType: 'json',
-                    type: 'GET'
-                }).done(function (data) {
-                    pos = new google.maps.LatLng(data[0].Position.Latitude, data[0].Position.Longitude)
-                    map.setCenter(pos);
-                })
-                    .fail(function() { alert("error"); })
-                    .always(function() {  });
-            };
-
-            function Search(term, sucess, failure) {
-                var url = './api/locations/search?latitude=' + pos.latitude + '&longitude=' + pos.longitude + '&term=' + term + '&distance=' + 50;
-                $.ajax({
-                    url: url,
-                    dataType: 'json',
-                    type: 'GET'
-                }).done(function () { sucess(); })
-                    .fail(function() { failure(); })
-                    .always(function() { alert("complete"); });
-                //bind to knockout
-                //should filter be part of knockout?                                    
-            };
+            ko.applyBindings(viewModel);
+     
     </script>
 }

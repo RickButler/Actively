@@ -1,4 +1,4 @@
-﻿.ui-content, #map_canvas{ margin: 0; padding: 0; }
+﻿.ui-content, #map{ margin: 0; padding: 0; }
 html { height: 100% } body { height: 100%; margin: 0; padding: 0 }
 .ui-header { text-align: center; }
 .ui-input-search { line-height: 30px;margin: 0.3em auto; }

@@ -141,13 +141,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\LatLngBoundsHelper.cs" />
+    <Compile Include="Helpers\PointHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActivelyContext.cs" />
+    <Compile Include="Models\LatLngBounds.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationRepository.cs" />
     <Compile Include="Models\PlaceRepository.cs" />
     <Compile Include="Models\Place.cs" />
-    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +200,16 @@
     </Content>
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\lopeway.bindinghandler.google.1.0.js" />
+    <Content Include="Scripts\lopeway.locations.1.0.js" />
+    <Content Include="Scripts\lopeway.maps.1.0.js" />
+    <Content Include="Scripts\lopeway.utilities.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\object.watch.js" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Home\JavaScript1.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

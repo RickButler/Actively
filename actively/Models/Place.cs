@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Spatial;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+using actively.Helpers;
 
 
 namespace actively.Models
@@ -42,23 +43,23 @@ namespace actively.Models
         public string SubDivisionCode { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public Position Position 
+        public Point Position 
         { 
             get
             {
                 if (Coordinates != null)
-                    return new Position { Latitude = this.Coordinates.Latitude, Longitude = this.Coordinates.Longitude };
-                return new Position();
+                    return new Point { Latitude = this.Coordinates.XCoordinate, Longitude = this.Coordinates.YCoordinate };
+                return new Point();
             } 
             set 
             {
 
-                Coordinates = value.ToDBGeography();
+                Coordinates = value.ToDBGeometry();
             } 
         }
 
         [Newtonsoft.Json.JsonIgnore, System.Xml.Serialization.XmlIgnore]
-        public DbGeography Coordinates { get; set; }
+        public DbGeometry Coordinates { get; set; }
 
         public int Accuracy { get; set; }
     }

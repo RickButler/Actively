@@ -11,11 +11,14 @@ namespace actively
                         "~/Scripts/jquery-1.*"));            
             bundles.Add(new ScriptBundle("~/bundles/jquerymobile").Include(
                         "~/Scripts/jquery.mobile*"));
+            bundles.Add(new ScriptBundle("~/bundles/lopeway").Include(
+             "~/Scripts/lopeway.*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include("~/Scripts/knockout-2.1.0*"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));     

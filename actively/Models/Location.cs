@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Spatial;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+using actively.Helpers;
 
 namespace actively.Models
 {
@@ -17,22 +18,22 @@ namespace actively.Models
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public Position Position
+        public Point Position
         {
             get
             {
                 if (Coordinates != null)
-                    return new Position { Latitude = this.Coordinates.Latitude, Longitude = this.Coordinates.Longitude };
-                return new Position();
+                    return new Point { Latitude = this.Coordinates.Centroid.XCoordinate, Longitude = this.Coordinates.Centroid.YCoordinate };
+                return new Point();
             }
             set
             {      
-                Coordinates = value.ToDBGeography();                    
+                Coordinates = value.ToDBGeometry();                    
             }
         }
 
         [Newtonsoft.Json.JsonIgnore, System.Xml.Serialization.XmlIgnore]
-        public DbGeography Coordinates { get; set; }
+        public DbGeometry Coordinates { get; set; }
             
         [StringLength(128)]
         public string Address { get; set; }

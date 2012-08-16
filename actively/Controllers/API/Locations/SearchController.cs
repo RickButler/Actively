@@ -37,7 +37,8 @@ namespace actively.Controllers.API.Locations
         // GET api/Default1/5
         public IQueryable<Location> GetLocation(double latitude, double longitude, string term, double distance)
         {
-            DbGeography coordinate =  DbGeography.FromText(string.Format("POINT({0} {1})", latitude, longitude));
+            DbGeometry coordinate =  DbGeometry.FromText(string.Format("POINT({0} {1})", latitude, longitude));
+           
             IQueryable<Location> locations = locationRepository.All.Where(loc => loc.Coordinates.Distance(coordinate) <= distance);
             if (locations.Count() < 1)
             {
